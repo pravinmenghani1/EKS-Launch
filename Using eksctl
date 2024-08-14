@@ -1,7 +1,11 @@
-This section outlines how to build a cluster for the lab exercises using the eksctl tool. This is the easiest way to get started, and is recommended for most learners.
+1. Create a file named create-cluster.sh with below contents.
 
-The eksctl utility has been pre-installed in your Amazon Cloud9 Environment, so we can immediately create the cluster. This is the configuration that will be used to build the cluster:
+#!/bin/bash
 
+export AWS_REGION="us-east-1"
+export EKS_CLUSTER_NAME="workshop"
+
+cat <<EOF > cluster.yml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 availabilityZones:
@@ -30,39 +34,28 @@ addons:
     resolveConflicts: overwrite
 managedNodeGroups:
   - name: default
-    desiredCapacity: 3
-    minSize: 3
+    desiredCapacity: 2
+    minSize: 2
     maxSize: 6
-    instanceType: m5.large
+    instanceType: t2.micro
     privateNetworking: true
     releaseVersion: "1.30.0-20240625"
     updateConfig:
       maxUnavailablePercentage: 50
     labels:
       workshop-default: "yes"
+EOF
+
+eksctl create cluster -f cluster.yml
 
 
-Based on this configuration eksctl will:
-
-Create a VPC across three availability zones
-
-Create an EKS cluster
-
-Create an IAM OIDC provider
-
-Add a managed node group named default
-
-Configure the VPC CNI to use prefix delegation
-
-Apply the configuration file like so:
+2. Make sure to give execution permission to your script and then run it:
 
 
-export EKS_CLUSTER_NAME=eks-workshop
+chmod +x create-cluster.sh
+./create-cluster.sh
 
-curl -fsSL https://raw.githubusercontent.com/aws-samples/eks-workshop-v2/stable/cluster/eksctl/cluster.yaml | \
-envsubst | eksctl create cluster -f -
-
-This generally takes 20 minutes. Once the cluster is created run this command to use the cluster for the lab exercises:
+This script will generate the cluster.yml with the correct values substituted and then create the EKS cluster.
 
 
-use-cluster $EKS_CLUSTER_NAME
+3. use-cluster $EKS_CLUSTER_NAME
