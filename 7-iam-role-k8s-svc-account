@@ -1,0 +1,17 @@
+eksctl create iamserviceaccount \
+  --cluster $EKS_CLUSTER_1 \
+  --namespace kube-system \
+  --region $AWS_REGION_1 \
+  --name aws-load-balancer-controller \
+  --attach-policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve
+  
+eksctl create iamserviceaccount \
+  --cluster $EKS_CLUSTER_2 \
+  --namespace kube-system \
+  --region $AWS_REGION_2 \
+  --name aws-load-balancer-controller \
+  --attach-policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve
