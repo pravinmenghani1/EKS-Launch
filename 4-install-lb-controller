@@ -1,0 +1,9 @@
+eksctl utils associate-iam-oidc-provider \
+  --region $AWS_REGION_1 \
+  --cluster $EKS_CLUSTER_1 \
+  --approve
+  
+eksctl utils associate-iam-oidc-provider \
+  --region $AWS_REGION_2 \
+  --cluster $EKS_CLUSTER_2 \
+  --approve
