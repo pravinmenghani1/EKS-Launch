@@ -1,0 +1,3 @@
+aws eks update-kubeconfig \
+  --name $EKS_CLUSTER_1 \
+  --region $AWS_REGION_1  
