@@ -1,0 +1,16 @@
+aws eks update-kubeconfig \
+  --name $EKS_CLUSTER_1 \
+  --region $AWS_REGION_1 
+  
+kubectl scale deployment py-az --replicas=0
+
+curl the primary ALB again and you will see a 502 error:
+
+curl $Ingress_1  
+
+<html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+</body>
+</html>
