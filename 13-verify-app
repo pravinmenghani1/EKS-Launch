@@ -1,0 +1,5 @@
+$ curl $Ingress_1
+Welcome to us-east-1c <-- The response should originate from your primary region
+
+$ curl $Ingress_2
+Welcome to us-east-2c <-- The response should originate from your secondary region
