@@ -1,7 +1,7 @@
 export AWS_REGION_1=us-east-1
 export AWS_REGION_2=us-east-2
-export EKS_CLUSTER_1=my-cluster-name
-export EKS_CLUSTER_2=my-cluster-name
+export EKS_CLUSTER_1=workshop
+export EKS_CLUSTER_2=workshop
 #export my_domain=<<example.com Your domain>>
 export ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
 Bash
