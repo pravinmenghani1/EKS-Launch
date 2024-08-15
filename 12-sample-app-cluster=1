@@ -1,0 +1,8 @@
+aws eks update-kubeconfig \
+  --name $EKS_CLUSTER_1 \
+  --region $AWS_REGION_1 
+
+kubectl apply -f sample_application.yaml
+
+export Ingress_1=$(kubectl get ingress py-az-ingress \
+  -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
