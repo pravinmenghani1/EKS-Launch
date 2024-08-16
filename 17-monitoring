@@ -18,3 +18,4 @@ In the AWS Management Console on the Services menu, click CloudWatch.
 On the left navigation menu under the Application Signals section, click Synthetics Canaries.
 Click the Create canary button.
 Choose Use a blueprint, and from the Blueprint section choose Heartbeat monitoring.
+
