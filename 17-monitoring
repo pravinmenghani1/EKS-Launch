@@ -18,4 +18,11 @@ In the AWS Management Console on the Services menu, click CloudWatch.
 On the left navigation menu under the Application Signals section, click Synthetics Canaries.
 Click the Create canary button.
 Choose Use a blueprint, and from the Blueprint section choose Heartbeat monitoring.
+Name your canary welcomeapp.
+Enter your Application or endpoint URL, this is the Ingress_1 endpoint which you've run curl against in application setup. Use the command echo $Ingress_1 to print the URL which you can copy to your clipboard. Canary Builder Screen.
+Scroll to the Schedule section and set the canary to run every 1 minute.
+Then, under Cloudwatch Alarms, create a new alarm as shown below. 
+Leave everything else as default and choose to Create canary. Wait for the canary to create - you will be redirected to the Canaries overview screen.
+From the Canaries overview: You will see a blue dot for a successful run, or a red dot if it has failed to reach the endpoint or the application is down.
+
 
