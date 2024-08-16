@@ -1,0 +1,10 @@
+# download and install Node.js (you may need to restart the terminal)
+nvm install 16
+nvm use 16
+# verifies the right Node.js version is in the environment
+node -v 
+# verifies the right npm version is in the environment
+npm -v 
+
+npm install -g artillery@latest
+
