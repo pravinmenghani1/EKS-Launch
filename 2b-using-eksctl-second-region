@@ -1,11 +1,11 @@
-1. Create a file named create-cluster.sh with below contents.
+1. Create a file named create-cluster2.sh with below contents.
 
 #!/bin/bash
 
 export AWS_REGION="us-east-2"
 export EKS_CLUSTER_NAME="workshop"
 
-cat <<EOF > cluster.yml
+cat <<EOF > cluster2.yml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 availabilityZones:
@@ -46,14 +46,14 @@ managedNodeGroups:
       workshop-default: "yes"
 EOF
 
-eksctl create cluster -f cluster.yml
+eksctl create cluster -f cluster2.yml
 
 
 2. Make sure to give execution permission to your script and then run it:
 
 
-chmod +x create-cluster.sh
-./create-cluster.sh
+chmod +x create-cluster2.sh
+./create-cluster2.sh
 
 This script will generate the cluster.yml with the correct values substituted and then create the EKS cluster.
 
