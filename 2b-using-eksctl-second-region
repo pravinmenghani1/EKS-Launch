@@ -1,0 +1,61 @@
+1. Create a file named create-cluster.sh with below contents.
+
+#!/bin/bash
+
+export AWS_REGION="us-east-2"
+export EKS_CLUSTER_NAME="workshop"
+
+cat <<EOF > cluster.yml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+availabilityZones:
+  - ${AWS_REGION}a
+  - ${AWS_REGION}b
+  - ${AWS_REGION}c
+metadata:
+  name: ${EKS_CLUSTER_NAME}
+  region: ${AWS_REGION}
+  version: "1.30"
+  tags:
+    karpenter.sh/discovery: ${EKS_CLUSTER_NAME}
+    created-by: eks-workshop-v2
+    env: ${EKS_CLUSTER_NAME}
+iam:
+  withOIDC: true
+vpc:
+  cidr: 10.42.0.0/16
+  clusterEndpoints:
+    privateAccess: true
+    publicAccess: true
+addons:
+  - name: vpc-cni
+    version: 1.16.0
+    configurationValues: '{"env":{"ENABLE_PREFIX_DELEGATION":"true", "ENABLE_POD_ENI":"true", "POD_SECURITY_GROUP_ENFORCING_MODE":"standard"},"enableNetworkPolicy": "true"}'
+    resolveConflicts: overwrite
+managedNodeGroups:
+  - name: default
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 6
+    instanceType: t2.micro
+    privateNetworking: true
+    releaseVersion: "1.30.0-20240625"
+    updateConfig:
+      maxUnavailablePercentage: 50
+    labels:
+      workshop-default: "yes"
+EOF
+
+eksctl create cluster -f cluster.yml
+
+
+2. Make sure to give execution permission to your script and then run it:
+
+
+chmod +x create-cluster.sh
+./create-cluster.sh
+
+This script will generate the cluster.yml with the correct values substituted and then create the EKS cluster.
+
+
+3. use-cluster $EKS_CLUSTER_NAME
