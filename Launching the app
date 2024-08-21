@@ -1,0 +1,45 @@
+Create K8s deployment
+
+1a. Create nginx-deployment.yaml by running the below code:
+
+
+cat <<EoF> nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+EoF
+
+
+1b. Create the nginx deployment using kubectl apply command:
+
+kubectl apply -f nginx-deployment.yaml
+
+1c. Check whether the deployment is created using kubectl get command:
+
+kubectl get deployment
+
+
+Expose the K8s app to see the details of pod, deployment and service
+
+Let's create a new service and expose an external IP address using the expose command with type as LoadBalancer:
+
+
+kubectl expose deployment/nginx-deployment --type="LoadBalancer"
