@@ -1,0 +1,4 @@
+Global_Accelerator_Arn=$(aws globalaccelerator create-accelerator \
+  --name multi-region \
+  --query "Accelerator.AcceleratorArn" \
+  --output text)
