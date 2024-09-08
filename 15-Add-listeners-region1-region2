@@ -5,6 +5,7 @@
 5. In the endpoint groups, add endpoint group and select Region = us-east-1, click next
 6. Add endpoint. Endpoint type = Application Load balancer, endpoint = choose one you see in drop down menu, leave weight = 128 and save
 7. Repeat steps 5 - 6 for us-east-2 region now.
+8. Copy DNS name of Global accelerator now and access the application in new browser.
 
 
 
